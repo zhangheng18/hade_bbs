@@ -1,11 +1,15 @@
 <script setup>
 import MkEditor from '@/components/MarkDownEditor/index.vue'
 import {reactive} from "vue";
+import {ElMessage} from "element-plus";
+import request from "@/utils/request.js";
+import router from "@/router/index.js";
 
 const question = reactive({
-  title: '',
-  content: ''
+  title: 'test',
+  context: 'context'
 })
+
 
 const editorOptions = {
   minHeight: '300px',
@@ -19,12 +23,23 @@ const editorOptions = {
     ['ul', 'ol', 'task',],
     ['table', 'image', 'link'],
     ['code', 'codeblock'],
-    ['scrollSync'],
   ]
 }
 
-function onSubmit() {
-  console.log(question)
+async function onSubmit() {
+  if (question.title === '' || question.context === '') {
+    ElMessage.error('问题标题和内容不能为空')
+    return
+  }
+
+  const resp = await request({
+    method: 'POST',
+    url: "/api/question/create",
+    data: question,
+  })
+  router.push({path: '/'})
+  ElMessage.success(resp.data)
+
 }
 
 </script>
@@ -34,18 +49,17 @@ function onSubmit() {
     <el-col :span="12">
       <el-card class="box-card" shadow="never">
         <el-form ref="form" :model="question">
-          <el-form-item >
-            <el-input v-model="question.title"></el-input>
+          <el-form-item>
+            <el-input v-model="question.title" placeholder="问题"></el-input>
           </el-form-item>
 
           <MkEditor :options="editorOptions"
-                  height="600px"
-                  initialEditType="wysiwyg"
-                  previewStyle="tab" />
-          <br />
+                    height="600px"
+                    initialEditType="markdown"
+                    previewStyle="vertical" v-model="question.context"/>
+          <br/>
           <el-form-item>
             <el-button type="primary" @click="onSubmit">立即提问</el-button>
-            <el-button>取消</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -61,4 +75,5 @@ function onSubmit() {
 .item {
   padding: 18px 0;
 }
+
 </style>

@@ -6,8 +6,19 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
         {
+            path: '/404',
+            component: () => import('@/views/404.vue')
+        },
+        // 404 page must be placed at the end !!!
+        { path: '/:pathMatch(.*)*', redirect: '/404', hidden: true },
+        {
             path: '/login',
             component: () => import('@/views/login/index.vue'),
+            hidden: true
+        },
+        {
+            path: '/register',
+            component: () => import('@/views/register/index.vue'),
             hidden: true
         },
         {
@@ -17,18 +28,24 @@ const router = createRouter({
 
             children: [
                 {
-                    path: '/',
+                    path: '',
+                    name: 'list',
                     component: ViewList
                 },
                 {
-                    path: '/create',
+                    path: 'create',
                     component: () => import('@/views/create/index.vue')
+                },
+                {
+                    path: 'detail',
+                    component: () => import('@/views/detail/index.vue')
+                },
+                {
+                    path: 'edit',
+                    name: 'edit',
+                    component: () => import('@/views/edit/index.vue')
                 }
             ]
-        },
-        {
-            path: '/404',
-            component: () => import('@/views/404.vue')
         }
     ]
 })

@@ -7,7 +7,7 @@
 #folder: /tmp/
 #file: coredemo.log
 
-driver: rotate # 切割日志
+driver: console
 level: trace # 日志级别
 #file: coredemo.log # 保存的日志文件
 rotate_count: 10  # 最多日志文件个数

@@ -15,6 +15,13 @@ import BBSHeader from '@/views/layout/header.vue'
 </template>
 
 <style scoped>
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
 :deep(.el-header) {
   background-color: #fff;
   text-align: center;
@@ -27,6 +34,10 @@ import BBSHeader from '@/views/layout/header.vue'
 :deep(.el-main) {
   background-color: #E9EEF3;
   height: calc(100vh - 52px);
+}
+
+body > :deep(.el-container) {
+  margin-bottom: 40px;
 }
 
 </style>

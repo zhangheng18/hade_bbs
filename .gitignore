@@ -12,6 +12,7 @@ storage
 /deploy/
 /config/hadeoffice
 .env
+*.exe
 
 # Logs
 logs

@@ -19,3 +19,12 @@ sls: # 阿里云SLS服务
     access_key_secret: your_access_key_secret
     project: hade-test
     logstore: hade_test_logstore
+
+domain: "http://127.0.0.1:8072/"
+
+smtp:
+    host: "smtp-mail.outlook.com"
+    port: 587
+    from: "test8@outlook.com"
+    username: "test@outlook.com"
+    password: "test"

@@ -1,7 +1,8 @@
 package http
 
 import (
-	"bbs/app/http/module/demo"
+	"bbs/app/http/module/qa"
+	"bbs/app/http/module/user"
 	"github.com/gohade/hade/framework/contract"
 	"github.com/gohade/hade/framework/gin"
 	ginSwagger "github.com/gohade/hade/framework/middleware/gin-swagger"
@@ -23,6 +24,6 @@ func Routes(r *gin.Engine) {
 	}
 
 	// 动态路由定义
-	_ = demo.Register(r)
-	//_ = gen.Register(r)
+	user.RegisterRoutes(r)
+	qa.RegisterRoutes(r)
 }

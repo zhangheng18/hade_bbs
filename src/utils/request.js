@@ -1,5 +1,7 @@
 import axios from 'axios'
-
+import {ElMessage } from "element-plus";
+import router from "@/router/index.js";
+import { removeToken } from "@/utils/auth.js";
 
 const service = axios.create({
     withCredentials: true,
@@ -20,20 +22,23 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         if (response.status !== 200) {
-            Message({
+            console.log('error' + response)
+            ElMessage ({
                 message: "请求错误",
                 type: 'error',
                 duration: 5 * 1000
             })
         }
+        return response
+
     },
     error => {
         console.log('err' + error)
-        Message({
-            message: error.message,
-            type: 'error',
-            duration: 5 * 1000
-        })
+        if (error.response.status === 401){
+            removeToken()
+            router.push('/login')
+        }
+        ElMessage.error(error.response.data)
         return Promise.reject(error)
     }
 )
