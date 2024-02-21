@@ -1,6 +1,7 @@
 package console
 
 import (
+	"bbs/app/console/command/foo"
 	"github.com/gohade/hade/framework"
 	"github.com/gohade/hade/framework/cobra"
 	"github.com/gohade/hade/framework/command"
@@ -38,12 +39,7 @@ func RunCommand(container framework.Container) error {
 
 // AddAppCommand 绑定业务的命令
 func AddAppCommand(rootCmd *cobra.Command) {
+	// 业务命令
+	rootCmd.AddCommand(foo.ModelInitCommand)
 
-	//rootCmd.AddCommand(foo.FooCommand)
-
-	// 每秒调用一次Foo命令
-	// rootCmd.AddCronCommand("* * * * * *", foo.FooCommand)
-
-	// 启动一个分布式任务调度，调度的服务名称为init_func_for_test，每个节点每5s调用一次Foo命令，抢占到了调度任务的节点将抢占锁持续挂载2s才释放
-	//rootCmd.AddDistributedCronCommand("foo_func_for_test", "*/5 * * * * *", demo.FooCommand, 2*time.Second)
 }

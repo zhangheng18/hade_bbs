@@ -1,71 +1,42 @@
-# 官方网站
+# 基于Hade Web框架的 问答网站
 
-http://hade.funaio.cn/
+* 前端： Vue3 + Element Plus + TOAST UI Editor
+* 后端： Hade + Mysql + Redis
 
-# 框架特色：
+# 运行
 
-## 基于协议
+* 安装 go 1.18 以上版本 node 20 以上版本
 
-服务与服务间的协议是基于协议进行交互的。
+* 安装 mysql (docker) 库配置(./config/development/database.yaml)
+    * docker run --env=TZ=Asia/Shanghai --env=MYSQL_ROOT_PASSWORD=root --env=useSSL=false -p 3306:3306 -p 33060:33060 -d mysql:latest
 
-## 前后端协同
+* 安装 redis (docker)
+    * docker run -p 6379:6379 -d redis:latest
 
-前后端协同开发
+* 安装前端依赖： npm install
+* 编译后端： go build -o bbs.exe
 
-## 命令行
+* 初始化表（需要先建好数据库) 
+    * ./bbs.exe migrate
+  
+* 运行：
+    * ./bbs.exe dev all
+    * 访问：http://127.0.0.1:8070
 
-有充分的命令行工具
+## 其他
 
-## 集成定时服务
+* 注册邮件需要STMP服务，修改 config/development/app.yaml 下的 stmp 配置
+* [hade文档](http://hade.funaio.cn/)
 
-如果你需要启动定时服务，提供命令进行定时服务的启动
+# 演示
 
-## 文档丰富
+* 首页
+    * ![首页](./docs/images/home.png)
 
-提供丰富的文档说明，提供丰富的文档说明
+* 详情
+    * ![详情](./docs/images/detail.png)
 
-## 开发模式
-
-在开发模式下进行前后端开发，极大提高了开发效率和开发体验
-
-## 使用指南
-
-[介绍](docs/guide/introduce.md)
-
-[安装](docs/guide/install.md)
-
-[编译](docs/guide/build.md)
-
-[目录结构](docs/guide/structure.md)
-
-[运行](docs/guide/app.md)
-
-[环境变量](docs/guide/env.md)
-
-[调试模式](docs/guide/dev.md)
-
-[命令](docs/guide/command.md)
-
-[定时任务](docs/guide/cron.md)
-
-[中间件](docs/guide/middleware.md)
-
-[swagger](docs/guide/swagger.md)
-
-[服务提供者](docs/guide/provider.md)
-
-[待做事项](docs/guide/todo.md)
-
-[数据模型](docs/guide/model.md)
-
-[辅助函数](docs/guide/util.md)
-
-# author
-
-有任何问题可直接github留言，或者联系作者：轩脉刃
-
-![xuanmairen](http://tuchuang.funaio.cn/mywechat.jpeg)
-
-# 更多
-
-本框架在极客时间开设专栏，欢迎对框架的生成感兴趣的同学关注专栏：《手把手带你写一个 Web 框架》
+* 问题编辑
+    * ![问题编辑](./docs/images/qa_edit.png)
+    
+  
